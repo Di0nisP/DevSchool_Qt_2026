@@ -37,6 +37,11 @@ inline constexpr auto updateFHz = 100; // Программный тик
 inline constexpr auto updateTms = 1000 / updateFHz;
 }
 
+/**
+ * @brief Утилитарная функция анимированного удаления виджета
+ * @param[in, out]  widget      Виджет
+ * @param[in]       durationMs  Длительность анимации. По умолчанию без анимации.
+ */
 void animateFadeOutAndDelete(QWidget* widget, uint16_t durationMs = 0)
 {
     if (!widget)
@@ -102,6 +107,15 @@ bool
 isLoseCondition(const GameBlock* const block)
 {
     return block->y() + block->height() >= block->parentWidget()->height();
+}
+
+/**
+ * @brief Функция проверки условия выхода из игры блока
+ */
+bool
+isFallBlock(const GameBlock* const block)
+{
+    return block->y() >= block->parentWidget()->height();
 }
 
 /**
@@ -256,6 +270,12 @@ MainWindow::MainWindow(QWidget *parent)
             for (auto* block : blocks) {
                 if (!conditions::isAliveBlock(block))
                     continue;
+
+                // Удаление упавших блоков
+                if (conditions::isFallBlock(block)) {
+                    animateFadeOutAndDelete(block, 0);
+                    continue;
+                }
 
                 // Проверка условия проигрыша
                 if (conditions::isLoseCondition(block) && gameState == GameState::Running) {
