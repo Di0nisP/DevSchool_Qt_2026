@@ -278,7 +278,7 @@ MainWindow::MainWindow(QWidget *parent)
                 }
 
                 // Проверка условия проигрыша
-                if (conditions::isLoseCondition(block) && gameState == GameState::Running) {
+                if (gameState == GameState::Running && conditions::isLoseCondition(block)) {
                     gameState = GameState::GameOver;
                     central->setStyleSheet("#gameCentral { background-color: darkred; }");
                     setWindowTitle(tr("You LOSE!"));
