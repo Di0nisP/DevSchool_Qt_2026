@@ -17,6 +17,8 @@ qt_add_qml_module(appWidgetMovement
     URI WidgetMovement
     QML_FILES
         Main.qml
+    # SOURCES
+    #     constants.h
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
