@@ -17,11 +17,16 @@ set_source_files_properties(Constants.qml PROPERTIES
     QT_QML_SINGLETON_TYPE TRUE
 )
 
+set_source_files_properties(Utils.qml PROPERTIES
+    QT_QML_SINGLETON_TYPE TRUE
+)
+
 qt_add_qml_module(appWidgetMovement
     URI WidgetMovement
     QML_FILES
         Main.qml
         Constants.qml
+        Utils.qml
     # SOURCES
     #     constants.h
 )
